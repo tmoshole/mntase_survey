@@ -209,7 +209,7 @@
   }
   label .req { color: var(--coral); margin-left: 2px; }
 
-  input[type="text"], input[type="tel"], select, textarea {
+  input[type="text"], input[type="tel"], input[type="number"], select, textarea {
     width: 100%; background: var(--cream);
     border: 1px solid var(--border); border-radius: 5px;
     padding: 10px 13px; font-family: 'Inter', sans-serif;
@@ -319,11 +319,6 @@
     font-size: 10px; font-weight: 600; color: var(--coral);
     background: rgba(200,64,26,0.08); border: 1px solid rgba(200,64,26,0.2);
     border-radius: 20px; padding: 3px 10px;
-  }
-  .profile-motivation {
-    background: var(--cream); border-left: 3px solid var(--coral);
-    border-radius: 0 5px 5px 0; padding: 14px 16px; margin-top: 4px;
-    font-size: 12px; color: var(--taupe); line-height: 1.7; font-style: italic;
   }
   .profile-card-footer {
     background: var(--cream); border-top: 1px solid var(--border);
@@ -442,8 +437,7 @@
   <div class="topbar-inner">
     <div class="brand">Mntase<span>!</span></div>
     <div class="nav-tabs">
-      <a class="tab-btn survey-link active" href="/survey">Apply</a>
-      <a class="tab-btn admin-only dashboard-link" href="/admin">Dashboard</a>
+      <a class="tab-btn admin-only dashboard-link" href="/admin">Admin Dashboard</a>
     </div>
   </div>
 </div>
@@ -520,14 +514,7 @@
 
         <div class="field">
           <label>How many people are in your community? <span class="req">*</span></label>
-          <select name="community_size" required>
-            <option value="" disabled selected>Select a range</option>
-            <option value="100-500">100 – 500</option>
-            <option value="500-1000">500 – 1 000</option>
-            <option value="1000-5000">1 000 – 5 000</option>
-            <option value="5000-20000">5 000 – 20 000</option>
-            <option value="20000+">20 000+</option>
-          </select>
+          <input type="number" name="community_size" min="1" step="1" inputmode="numeric" placeholder="e.g. 1500" required>
         </div>
 
         <div class="field">
@@ -565,33 +552,6 @@
         <div id="extra-groups-container"></div>
         <button type="button" class="btn-outline" id="add-group-btn">Add another group</button>
         <p class="submit-note">If you lead more than one group, add them here so we capture your full reach. Each group becomes part of the same submission.</p>
-      </div>
-
-      <!-- Section 4 -->
-      <div class="form-card">
-        <div class="section-label">04 &nbsp;·&nbsp; A Few More Questions</div>
-
-        <div class="field">
-          <label>Why do you want to be a Mpintshi? <span class="req">*</span></label>
-          <textarea name="motivation" placeholder="Tell us in your own words. There are no wrong answers." required></textarea>
-        </div>
-
-        <div class="field">
-          <label>Have you ever been paid to manage or lead a community? <span class="req">*</span></label>
-          <div class="pill-group">
-            <label><input type="radio" name="paid_before" value="Yes" required><span>Yes</span></label>
-            <label><input type="radio" name="paid_before" value="No"><span>No</span></label>
-          </div>
-        </div>
-
-        <div class="field">
-          <label>Can you attend the Founding Weekend in East London, 5–8 June 2026? <span class="req">*</span></label>
-          <div class="pill-group">
-            <label><input type="radio" name="founding_weekend" value="Yes" required><span>Yes</span></label>
-            <label><input type="radio" name="founding_weekend" value="No"><span>No</span></label>
-            <label><input type="radio" name="founding_weekend" value="Not sure yet"><span>Not sure yet</span></label>
-          </div>
-        </div>
       </div>
 
       <button type="submit" class="btn-submit">Put me on the list</button>
@@ -634,10 +594,6 @@
             <div class="profile-item-label">Leading For</div>
             <div class="profile-item-value" id="pc-age"></div>
           </div>
-          <div class="profile-item">
-            <div class="profile-item-label">Founding Weekend</div>
-            <div class="profile-item-value" id="pc-weekend"></div>
-          </div>
         </div>
         <div class="profile-item" style="margin-bottom:14px;">
           <div class="profile-item-label">Community Focus</div>
@@ -646,10 +602,6 @@
         <div class="profile-item" style="margin-bottom:14px;">
           <div class="profile-item-label">Additional groups</div>
           <div id="pc-extra-groups"></div>
-        </div>
-        <div class="profile-item">
-          <div class="profile-item-label">Why I want to be a Mpintshi</div>
-          <div class="profile-motivation" id="pc-motivation"></div>
         </div>
       </div>
       <div class="profile-card-footer">
@@ -660,7 +612,7 @@
 
     <div class="profile-cta">
       <h3>You're on the list.</h3>
-      <p>We have received your details. We will be in touch before the Founding Weekend in East London. Welcome to the movement, Mpintshi. Screenshot your card above and share it with your community.</p>
+      <p>We have received your details. We will be in touch with shortlisted applicants directly. Welcome to the movement, Mpintshi. Screenshot your card above and share it with your community.</p>
       <button class="btn-secondary" onclick="applyAgain()">Submit another application</button>
     </div>
   </div><!-- end profile view -->
@@ -690,11 +642,6 @@
           <div class="stat-sub">Combined community reach</div>
         </div>
         <div class="stat-card">
-          <div class="stat-label">Founding Weekend</div>
-          <div class="stat-value" id="stat-weekend">0</div>
-          <div class="stat-sub">Confirmed attendance</div>
-        </div>
-        <div class="stat-card">
           <div class="stat-label">Provinces Represented</div>
           <div class="stat-value" id="stat-provinces">0</div>
           <div class="stat-sub">Across South Africa</div>
@@ -717,7 +664,7 @@
       </div>
 
       <div class="breakdown-card">
-        <div class="breakdown-title">Community Size Ranges</div>
+        <div class="breakdown-title">Community Sizes</div>
         <div id="size-bars"></div>
       </div>
 
@@ -762,6 +709,28 @@
     '100-500': 300, '500-1000': 750, '1000-5000': 3000,
     '5000-20000': 12500, '20000+': 25000
   };
+  const NUMBER_FORMAT = new Intl.NumberFormat('en-ZA');
+
+  function getCommunityReachValue(value) {
+    if (!value) return 0;
+    if (SIZE_MAP[value]) return SIZE_MAP[value];
+    const numericValue = Number(String(value).replace(/[^\d]/g, ''));
+    return Number.isFinite(numericValue) ? numericValue : 0;
+  }
+
+  function formatCommunitySize(value) {
+    if (!value) return '';
+    const rangeLabels = {
+      '100-500': '100–500',
+      '500-1000': '500–1 000',
+      '1000-5000': '1 000–5 000',
+      '5000-20000': '5 000–20 000',
+      '20000+': '20 000+'
+    };
+    if (rangeLabels[value]) return rangeLabels[value];
+    const numericValue = getCommunityReachValue(value);
+    return numericValue ? NUMBER_FORMAT.format(numericValue) : value;
+  }
 
   function getLocalSubmissions() {
     try { return JSON.parse(localStorage.getItem(STORE_KEY)) || []; }
@@ -1017,9 +986,6 @@
         focus: focusFinal
       },
       extra_groups: extraGroups,
-      motivation: fd.get('motivation'),
-      paid_before: fd.get('paid_before'),
-      founding_weekend: fd.get('founding_weekend'),
       submitted_at: new Date().toISOString()
     };
 
@@ -1057,11 +1023,8 @@
     document.getElementById('pc-province').textContent = entry.province;
     document.getElementById('pc-city').textContent = entry.city;
     document.getElementById('pc-platform').textContent = entry.community.platform;
-    document.getElementById('pc-size').textContent = (entry.community.community_size || '').replace('-', ' – ');
+    document.getElementById('pc-size').textContent = formatCommunitySize(entry.community.community_size);
     document.getElementById('pc-age').textContent = entry.community.community_age;
-    document.getElementById('pc-weekend').textContent = entry.founding_weekend;
-    document.getElementById('pc-motivation').textContent = entry.motivation;
-
     const focusEl = document.getElementById('pc-focus');
     focusEl.innerHTML = '';
     (entry.community.focus || []).forEach(f => {
@@ -1079,7 +1042,7 @@
       groupPreview.innerHTML = `
         <div class="group-preview-title">Group ${index + 1}: ${group.name || 'Untitled group'}</div>
         <div class="group-preview-meta">${group.platform || 'No platform'} · ${group.province || ''}${group.province && group.city ? ' · ' : ''}${group.city || ''}</div>
-        <div class="group-preview-meta">${(group.community_size || '').replace('-', ' – ')} · ${group.community_age || 'Duration not specified'}</div>
+        <div class="group-preview-meta">${formatCommunitySize(group.community_size)} · ${group.community_age || 'Duration not specified'}</div>
         <div class="group-preview-meta">Focus: ${(group.focus || []).join(', ') || 'Not specified'}</div>
       `;
       extraGroupsEl.appendChild(groupPreview);
@@ -1135,13 +1098,11 @@
       return groups;
     });
 
-    const reach = allGroups.reduce((sum, group) => sum + (SIZE_MAP[group.community_size] || 0), 0);
-    const weekendYes = subs.filter(s => s.founding_weekend === 'Yes').length;
+    const reach = allGroups.reduce((sum, group) => sum + getCommunityReachValue(group.community_size), 0);
     const provinces = new Set(allGroups.map(g => g.province || 'Unknown')).size;
 
     document.getElementById('stat-total').textContent = subs.length;
     document.getElementById('stat-reach').textContent = reach >= 1000 ? (reach / 1000).toFixed(1) + 'k' : reach;
-    document.getElementById('stat-weekend').textContent = weekendYes;
     document.getElementById('stat-provinces').textContent = provinces;
 
     renderBars('province-bars', countBy(allGroups, 'province'));
@@ -1151,10 +1112,9 @@
     allGroups.forEach(g => (g.focus || []).forEach(f => focusCount[f] = (focusCount[f] || 0) + 1));
     renderBars('focus-bars', focusCount);
 
-    const sizeLabels = {'100-500':'100–500','500-1000':'500–1 000','1000-5000':'1 000–5 000','5000-20000':'5 000–20 000','20000+':'20 000+'};
     const sizeCount = countBy(allGroups, 'community_size');
     const sizeCountLabelled = {};
-    Object.entries(sizeCount).forEach(([k,v]) => sizeCountLabelled[sizeLabels[k] || k] = v);
+    Object.entries(sizeCount).forEach(([k,v]) => sizeCountLabelled[formatCommunitySize(k)] = v);
     renderBars('size-bars', sizeCountLabelled);
   }
 
@@ -1192,7 +1152,7 @@
   async function exportCSV() {
     const subs = await fetchSubmissions();
     if (!subs.length) return;
-    const headers = ['ID','Name','Phone','Province','City','Main Group','Additional Groups','Motivation','Paid Before','Founding Weekend','Submitted'];
+    const headers = ['ID','Name','Phone','Province','City','Main Group','Additional Groups','Submitted'];
     const rows = subs.map(s => {
       const mainGroup = formatGroupForCSV(s.community || {});
       const extraGroups = (s.extra_groups || []).map(formatGroupForCSV).join(' | ');
@@ -1200,8 +1160,7 @@
         s.id, s.full_name, s.phone, s.province, s.city,
         '"' + mainGroup.replace(/"/g,'""') + '"',
         '"' + extraGroups.replace(/"/g,'""') + '"',
-        '"' + (s.motivation || '').replace(/"/g,'""') + '"',
-        s.paid_before, s.founding_weekend, s.submitted_at
+        s.submitted_at
       ];
     });
     const csv = [headers, ...rows].map(r => r.join(',')).join('\n');

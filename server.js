@@ -85,9 +85,6 @@ app.post('/api/submit', (req, res) => {
       city: payload.city || '',
       community: payload.community || {},
       extra_groups: Array.isArray(payload.extra_groups) ? payload.extra_groups : [],
-      motivation: payload.motivation || '',
-      paid_before: payload.paid_before || '',
-      founding_weekend: payload.founding_weekend || '',
       submitted_at: new Date().toISOString()
     };
     submissions.push(entry);
