@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: mntase-survey
+    runtime: node
+    plan: starter
+    buildCommand: npm ci
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATA_DIR
+        value: /var/data
+      - key: ADMIN_TOKEN
+        sync: false
+    disk:
+      name: submissions
+      mountPath: /var/data
+      sizeGB: 1
