@@ -142,16 +142,6 @@
     margin-top: 20px; max-width: 500px;
   }
 
-  /* Perks strip */
-  .perks-strip {
-    background: var(--dark-band); border-radius: 8px;
-    padding: 20px 24px; margin: 4px 0 32px;
-    display: grid; grid-template-columns: repeat(3,1fr); gap: 16px;
-  }
-  .perk { border-left: 2px solid var(--coral); padding-left: 12px; }
-  .perk-value { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 3px; }
-  .perk-label { font-size: 9px; color: var(--band-text); line-height: 1.5; }
-
   /* Section label */
   .section-label {
     font-size: 8px; font-weight: 700; letter-spacing: 0.22em;
@@ -196,7 +186,6 @@
   .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   @media (max-width: 500px) {
     .field-row { grid-template-columns: 1fr; }
-    .perks-strip { grid-template-columns: 1fr; }
   }
 
   .field { margin-bottom: 18px; }
@@ -457,12 +446,6 @@
       <div class="hero-headline">Your people<br>already trust<br>you.</div>
       <div class="hero-italic">Now lead them into<br>growing the community.</div>
       <p class="hero-sub">We are building a community-owned network that makes sure the stories told about ordinary South Africans are based on true data. Fill in below and we will be in touch.</p>
-    </div>
-
-    <div class="perks-strip">
-      <div class="perk"><div class="perk-value">R3 000/month</div><div class="perk-label">Starting stipend, Jun–Dec 2026</div></div>
-      <div class="perk"><div class="perk-value">R6 000 + bonuses</div><div class="perk-label">Once we hit momentum</div></div>
-      <div class="perk"><div class="perk-value">Founding status</div><div class="perk-label">Part of something built to last</div></div>
     </div>
 
     <form id="mpintshi-form">
